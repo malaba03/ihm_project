@@ -1,0 +1,14 @@
+ -------------------------------------------------------
+|For novice users					|
+ -------------------------------------------------------
+
+---------------------------------------------------------
+Get a new Makefile and get executable(run in a terminal): 
+
+$ qmake -o Makefile gestionnairetaches.pro //New Makefile
+$ make
+$ ./gestionnairetaches 
+
+----------------------------------------------------------------
+Double click on gestionnairetaches.pro to run it into Qt Creator
+
