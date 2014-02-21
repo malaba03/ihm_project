@@ -5,9 +5,9 @@
 ---------------------------------------------------------
 Get a new Makefile and get executable(run in a terminal): 
 
-$ qmake -o Makefile gestionnairetaches.pro //New Makefile
+$ qmake -o Makefile mapeditor1.1.pro //New Makefile
 $ make
-$ ./gestionnairetaches 
+$ ./mapeditor1.1 
 
 ----------------------------------------------------------------
 Double click on gestionnairetaches.pro to run it into Qt Creator
