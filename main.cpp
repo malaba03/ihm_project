@@ -16,6 +16,8 @@ int main()
 
     //corridors 001
     Corridor c001("C001");
+    //c001.setPosition(Position(565, 2));
+    //c001.setSize(Size(39, 259));
         // salle
         Classroom class39("039");
         class39.setPosition(Position(609, 172));
@@ -25,6 +27,8 @@ int main()
 
     //corridors 002
     Corridor c002("C002");
+    c002.setPosition(Position(565, 2));
+    c002.setSize(Size(39, 259));
        // salles
         Restroom s001("S001");
         Restroom s002("S002");
@@ -35,6 +39,8 @@ int main()
 
     // corridor 003
     Corridor c003("C003");
+    c003.setPosition(Position(120, 145));
+    c003.setSize(Size(492, 21));
         Classroom class331("033.1");
             class331.setPosition(Position(121, 166));
             class331.setSize(Size(41, 119));
@@ -72,6 +78,7 @@ int main()
             class381.setSize(Size(77, 134));
 
         c003.addClassroom(class331);
+         //class331.getCorridor();
         c003.addClassroom(class34);
         c003.addClassroom(class35);
         c003.addClassroom(class351);
@@ -85,6 +92,8 @@ int main()
 
     // corridor C004
     Corridor c004("C004");
+    c004.setPosition(Position(7, 144));
+    c004.setSize(Size(114, 24));
         // create classrooms
         Classroom class33("33");
             class33.setPosition(Position(6, 144));
@@ -101,6 +110,13 @@ int main()
 
     building.addLevel(nivo_0);
 
-    building.findPath("");
+    building.findPath(class331.getName(),nivo_0.getName(), Position(556, 156));
+
+    building.exporteToXml();
+    //building.getCorrdidorFromPosition(nivo_0.getName(), Position(578, 62));
+
+    //Component* mnCorr = class331.getCorridor();
+
+    //cout << "Class:" << class331.getName() << " => Corridor:" << class331.getCorridor()<< endl;
     return 0;
 }

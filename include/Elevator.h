@@ -9,6 +9,8 @@ class Elevator : public Component
     public:
         Elevator();
         Elevator(std::string nm);
+        void setState(int s)
+        {state=s;}
     protected:
     private:
 };

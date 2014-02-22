@@ -9,6 +9,8 @@ Corridor::Corridor(std::string nm) : Component(nm)
 // add get remove classrooms
 void Corridor::addClassroom(Classroom classroom)
 {
+    classroom.setCorridor(this);
+
     this->classrooms.push_back(classroom);
 }
 
@@ -93,6 +95,27 @@ void Corridor::removeElevator(Elevator elevator)
         if(*iter==elevator)
         {
             this->elevators.remove(elevator);
+        }
+    }
+}
+
+//Junctions
+void Corridor::addJunction(Junction junction)
+{
+    this->junctions.push_back(junction);
+}
+std::list<Junction> Corridor::getJunctions()
+{
+    return this->junctions;
+}
+void Corridor::removeJunction(Junction junction)
+{
+    std::list<Junction>::iterator iter;
+    for (iter=this->junctions.begin(); iter!=this->junctions.end(); ++iter)
+    {
+        if(*iter==junction)
+        {
+            this->junctions.remove(junction);
         }
     }
 }

@@ -1,12 +1,14 @@
 #include "Position.h"
 
 Position::Position() : posX(0), posY(0)
-{
-    //ctor
-}
+{}
 
 Position::Position(double x, double y): posX(x), posY(y)
 {}
+bool Position::operator==(const Position& aPosition) const
+{
+    return (posX==aPosition.posX && posY==aPosition.posY);
+}
 void Position::setPosX(double x)
 {
     this->posX=x;

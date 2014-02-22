@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<building>
+   <levels>
+      <level name="00" posX="0" posY="0" width="5.11973e-307" height="1.55757e-311" state="2.68393e+006">
+         <corridors>
+            <corridor name="C001" posX="0" posY="0" width="1.69788e-313" height="2.122e-314" state="1">
+               <classrooms>
+                  <classroom name="039" posX="609" posY="172" width="75" height="" state="2.68364e+006"/>
+                  <classroom name="34" posX="84" posY="7" width="160" height="134" state="2.88794e+006"/>
+                  <classroom name="35" posX="166" posY="166" width="160" height="134" state="-1.07374e+009"/>
+                  <classroom name="0351" posX="324" posY="167" width="78" height="134" state="5.70224e+006"/>
+                  <classroom name="36" posX="242" posY="7" width="121" height="134" state="0"/>
+                  <classroom name="37" posX="405" posY="167" width="37" height="134" state="5.70224e+006"/>
+                  <classroom name="0371" posX="445" posY="167" width="116" height="134" state="-2"/>
+                  <classroom name="38" posX="364" posY="7" width="121" height="" state="131074"/>
+                  <classroom name="0381" posX="485" posY="7" width="77" height="134" state="2.0029e+009"/>
+                  <classroom name="34" posX="84" posY="7" width="160" height="" state="2.88794e+006"/>
+               </classrooms>
+               <corridor name="C002" posX="565" posY="2" width="39" height="259" state="2.00313e+009">
+                  <classrooms/>
+                  <corridor name="C003" posX="120" posY="145" width="492" height="21" state="5.72695e+006">
+                     <classrooms>
+                        <classroom name="033.1" posX="121" posY="166" width="41" height="119" state="1033"/>
+                     </classrooms>
+                     <corridor name="C004" posX="7" posY="144" width="114" height="24" state="6.61925e+006">
+                        <classrooms>
+                           <classroom name="33" posX="6" posY="144" width="113" height="161" state="7.99551e+006"/>
+                        </classrooms>
+                     </corridor>
+                  </corridor>
+               </corridor>
+            </corridor>
+         </corridors>
+      </level>
+   </levels>
+</building>

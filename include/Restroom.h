@@ -9,6 +9,8 @@ class Restroom : public Component
     public:
         Restroom();
         Restroom(std::string nm);
+        void setState(int s)
+        {state=s;}
     protected:
     private:
 };

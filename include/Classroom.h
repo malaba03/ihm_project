@@ -3,6 +3,7 @@
 
 #include "Component.h"
 //#include "Corridor.h"
+//#include "functions.h"
 
 class Classroom : public Component
 {
@@ -10,11 +11,13 @@ class Classroom : public Component
         Classroom();
         Classroom(std::string nm);
 
-        //void setCorridor(Corridor cor);
-        //Corridor getCorridor();
+        void setCorridor(Component* cor);
+        Component getCorridor();
+        //Component* corridor;
+        Position getNearPosition(Component corridor, Position userPos);
     protected:
     private:
-        //Corridor corridor;
+       Component* corridor;
 };
 
 #endif // CLASSROOM_H

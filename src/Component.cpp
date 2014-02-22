@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Component.h"
 
 Component::Component(std::string n) : name(n)
@@ -13,8 +14,6 @@ void Component::setPosition(Position p)
 void Component::setSize(Size s)
 {size=s;}
 
-void Component::setState(int s)
-{state=s;}
 void Component::setName(std::string nm)
 {this->name = nm;}
 
@@ -32,7 +31,7 @@ int Component::getState()
 std::string Component::getName()
 {return this->name;}
 
-std::list<Door> Component::getDoors()
+std::vector<Door> Component::getDoors()
 {
     return this->doors;
 }
@@ -45,12 +44,24 @@ void Component::addDoor(Door door)
 
 void Component::removeDoor(Door door)
 {
-    std::list<Door>::iterator iter;
+    std::vector<Door>::iterator iter;
     for (iter=this->doors.begin(); iter!=this->doors.end(); ++iter)
     {
         if(*iter==door)
         {
-            this->doors.remove(door);
+            this->doors.erase(iter);
         }
     }
+}
+
+double Component::calculateDistance(Component corridor, Position position1, Position position2)
+{
+    double distance;
+    if(corridor.getSize().getWidth()>corridor.getSize().getHeight()){
+        distance = position2.getPosX()-position1.getPosX();
+    }
+    else{
+        distance = position2.getPosY()-position1.getPosY();
+    }
+    return fabs(distance);
 }

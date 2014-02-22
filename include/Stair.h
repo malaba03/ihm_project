@@ -9,6 +9,8 @@ class Stair : public Component
     public:
         Stair();
         Stair(std::string nm);
+        void setState(int s)
+        {state=s;}
     protected:
     private:
 };

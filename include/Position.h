@@ -7,6 +7,7 @@ class Position
     public:
         Position();
         Position(double x, double y);
+        bool operator==(const Position& aPosition) const;
 
         void setPosX(double x);
         void setPosY(double y);

@@ -2,6 +2,7 @@
 #define COMPONENT_H
 #include <iostream>
 #include <list>
+#include <vector>
 #include "Door.h"
 #include "Position.h"
 #include "Size.h"
@@ -16,7 +17,7 @@ class Component
 
         void setPosition(Position p);
         void setSize(Size s);
-        void setState(int s);
+        virtual void setState(int s);
         void setName(std::string nm);
 
         void addDoor(Door door);
@@ -27,13 +28,17 @@ class Component
         int getState();
         std::string getName();
 
-        std::list<Door> getDoors();
+        std::vector<Door> getDoors();
+
+        double calculateDistance(Component corridor,Position userPos, Position porte);
+        /*virtual Door* getNearDoor(Component corridor, Position userPos)
+        {std::cout << " #### IN Component ### "<< std::endl; return NULL;}*/
     protected:
         std::string name;
         Position position;
         Size size;
         int state;
-        std::list<Door> doors;
+        std::vector<Door> doors;
     private:
 };
 

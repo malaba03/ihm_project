@@ -13,6 +13,9 @@ class Level : public Component
         Level();
         Level(std::string nm);
 
+        void setState(int s)
+        {state=s;}
+
         void addCorridor(Corridor corridor);
         void addStair(Stair stair);
         void addElevator(Elevator elevator);
