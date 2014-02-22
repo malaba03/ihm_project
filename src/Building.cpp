@@ -220,7 +220,7 @@ XtreMLNODE* putDoors(XtreMLNODE *node, Component component){
             _tmpDoor->AttrAdd("state", doubleToWchar((*iter_dor).getState()));
 
             //_tmpDoor = document.FindNode("doors");
-            _tmpDoor = _tmpDoor.GetContainer();
+            _tmpDoor = _tmpDoor->GetContainer();
         }
     }
     return node;
@@ -232,6 +232,7 @@ void Building::exporteToXml(){
     document.ProcessingAdd("xml version=\"1.0\" encoding=\"UTF-8\"");// on ajoute le prologue.
 
     root = document.NodeAdd("building");
+    root->AttrAdd("name", this->name);
     root = root->NodeAdd("levels");
     // Add levels start
     std::list<Level> levels = this->getLevels();
@@ -247,7 +248,7 @@ void Building::exporteToXml(){
         _tmpLvl->AttrAdd("height", doubleToWchar((*iter_lvl).getSize().getHeight()));
         _tmpLvl->AttrAdd("state", doubleToWchar((*iter_lvl).getState()));
 
-        _tmpLvl = putDoors(_tmpLvl);
+        _tmpLvl = putDoors(_tmpLvl, (*iter_lvl));
 
         // Add Corridor start
         _tmpCorr = _tmpLvl->NodeAdd("corridors");
@@ -296,6 +297,7 @@ void Building::exporteToXml(){
     GetCurrentDirectoryA(256, lpBuffer); //on récuperer le répertoire  courant
     string = lpBuffer;
     string += "\\";
-    string += "my_building-2.xml";  //construction du nom complet du fichier de sortie
+    string += this->name.c_str();
+    string += ".xml";  //construction du nom complet du fichier de sortie
     document.SaveToFile(string.w_str(), EncUTF8, true);// on enregistre le document au format UTF-8, avec le BOM
 }

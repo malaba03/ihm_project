@@ -7,12 +7,18 @@ int main()
     cout << "Hello world!" << endl;
 
     //batiment
-    Building building("bat14");
+    Building building;//("bat14");
 
     // levels
     Level nivo_0("00");
     Level nivo_1("01");
     Level nivo_2("02");
+
+    Door door1("doorlv1");
+    door1.setPosition(Position(114, 25));
+    door1.setSize(Size(1.5, 3));
+
+    nivo_0.addDoor(door1);
 
     //corridors 001
     Corridor c001("C001");
