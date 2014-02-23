@@ -38,7 +38,7 @@
     QLabel *corridorP3 = new ComponentLabel(this,":/images/corridors/corridorP3.png",keyCorridor);
     QLabel *corridorP4 = new ComponentLabel(this,":/images/corridors/corridorP4.png",keyCorridor);
     QLabel *corridorP5 = new ComponentLabel(this,":/images/corridors/corridorP5.png",keyCorridor);
-    /* QLabel *corridorP6 = new ComponentLabel(this,":/images/corridors/corridorP3.png",keyCorridor);*/
+    QLabel *corridorP6 = new ComponentLabel(this,":/images/corridors/corridorP6.png",keyCorridor);
 
     ComponentIconLayout->addWidget(corridorVIc);
     ComponentIconLayout->addWidget(corridorHIc);
@@ -47,7 +47,7 @@
     ComponentIconLayout->addWidget(corridorP3);
     ComponentIconLayout->addWidget(corridorP4);
     ComponentIconLayout->addWidget(corridorP5);
-    /*ComponentIconLayout->addWidget(corridorP6);*/
+    ComponentIconLayout->addWidget(corridorP6);
 
 
 

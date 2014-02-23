@@ -31,5 +31,6 @@
         <file>corridors/corridorP4.png</file>
         <file>corridors/corridorP5.png</file>
         <file>classrooms/classroomP1.png</file>
+        <file>corridors/corridorP6.png</file>
     </qresource>
 </RCC>
