@@ -49,12 +49,19 @@ void Mainwindow::createActionsMenubar()
     closeProject->setStatusTip(tr("Close the current project"));
     connect(closeProject, SIGNAL(triggered()), this, SLOT(closeProjectPopup()));
 
+    exit = new QAction(tr("&Exit"),this);
+    closeProject->setStatusTip(tr("Close the mapEditor windows"));
+    connect(exit, SIGNAL(triggered()), this, SLOT(close()));
+
 }
 
 void Mainwindow::createMenu(){
 
     fileMenu = this->menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newProject);
+    fileMenu->addAction(exit);
+    fileMenu->insertSeparator(exit);
+
 
     editMenu = this->menuBar()->addMenu(tr("&Edit"));
     viewMenu = this->menuBar()->addMenu(tr("&View"));
