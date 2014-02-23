@@ -14,12 +14,12 @@
         <file>stairs/toRight.png</file>
         <file>stairs/toUp.png</file>
         <file>stairs/toDown.png</file>
-        <file>bat14_level2.jpg</file>
         <file>classroom/classroom.png</file>
         <file>corridors/corridorH.png</file>
         <file>corridors/corridorV.png</file>
         <file>restrooms/restroom.png</file>
         <file>elevators/elevator.png</file>
         <file>qrCode/qrcode.png</file>
+        <file>firstlayer.png</file>
     </qresource>
 </RCC>

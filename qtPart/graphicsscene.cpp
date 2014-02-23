@@ -13,11 +13,14 @@
 
 using namespace std;
 
-GraphicsScene::GraphicsScene(QObject *parent) :
-    QGraphicsScene(parent)
+GraphicsScene::GraphicsScene(QString layerFil) :
+    QGraphicsScene()
 {
 
-    QImage layer(":/images/bat14_level2.jpg");
+    //QImage layer(":/images/bat14_level2.jpg");
+
+    layerFile = layerFil;
+     QImage layer(layerFile);
     setSceneRect(QRectF(0, 0, layer.width(),layer.height()));
 
 
@@ -71,14 +74,14 @@ void GraphicsScene::dropEvent ( QGraphicsSceneDragDropEvent * event ){
         //Peut etre utilisé pour la création des classes coeur(Classroom,Door,Corridor...)
         switch(type){
 
-            case ClassroomType :
+        case ClassroomType :
             tempGraphicComponent = new GraphicClassroomComponent(pixmap,type);
             tempGraphicComponent->setPos(event->scenePos());;
             break;
 
-            default:
+        default:
             tempGraphicComponent = new GraphicComponent(pixmap,type);
-           //testPixmap = new GraphicComponent(pixmap);
+            //testPixmap = new GraphicComponent(pixmap);
             tempGraphicComponent->setPos(event->scenePos());;
 
         }
@@ -105,7 +108,7 @@ void GraphicsScene::drawBackground ( QPainter * painter, const QRectF & rect ){
 
     painter->setPen(Qt::black);
     painter->setBackgroundMode(Qt::OpaqueMode);
-    painter->drawPixmap(QPoint(0,0),QPixmap(":/images/bat14_level2.jpg"));
+    painter->drawPixmap(QPoint(0,0),QPixmap(layerFile));
 
 }
 
@@ -117,7 +120,7 @@ void GraphicsScene::deleteComponents(){
     //Boucle pour la suppression de tous les éléments de la liste
     if(!(itemsSelected->isEmpty())){
 
-            this->removeItem(itemsSelected->first());
+        this->removeItem(itemsSelected->first());
 
 
         QMessageBox msgBox;
@@ -141,4 +144,14 @@ void GraphicsScene::deleteComponents(){
 
     }
 
+}
+
+QString GraphicsScene::getLayerFile() const
+{
+    return layerFile;
+}
+
+void GraphicsScene::setLayerFile(const QString &value)
+{
+    layerFile = value;
 }

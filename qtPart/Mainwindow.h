@@ -1,6 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "dragwidget.h"
+#include "graphicsscene.h"
+#include "newprojectdialog.h"
+
 #include <QMainWindow>
 #include <QToolBar>
 #include <QGraphicsView>
@@ -9,8 +13,9 @@
 #include <QMenu>
 #include <QHBoxLayout>
 #include <QSplitter>
-#include "dragwidget.h"
-#include "graphicsscene.h"
+#include <QDir>
+#include <QDebug>
+
 
 /*namespace Ui {
 class MainWindow;
@@ -22,13 +27,21 @@ class Mainwindow : public QMainWindow
 public:
      Mainwindow();
     
+     QDir getCurrentProDir() const;
+     void setCurrentProDir(const QDir &value);
+
+     QString getLayerFilPath() const;
+     void setLayerFilPath(const QString &value);
+
 public slots:
-    void newProjectPopup();
-    void openProjectPopup();
-    void closeProjectPopup();
+     void newProjectDialog();
+     void openProjectPopup();
+     void closeProjectPopup();
     void exportPopup();
     void saveProjectPopup();
     void exitPopup();
+    void receiveCurrentProjectDir(QDir currentProjectDir);
+    void receiveLayerFilePath(QString layerFilePath);
 
 
 private:
@@ -45,6 +58,8 @@ private:
     void createComponentsView2();
     void setEditViewLayer();
 
+    void createAllPopupDialog();
+
     DragWidget *componentsView;
 
     GraphicsScene *mapEditScene;
@@ -52,7 +67,7 @@ private:
 
     QTreeView *projectView;
 
-///////////////////////Menu bar///////////////////////////
+///////////////////////MENU BAR///////////////////////////
     QMenu *fileMenu;
 
     QAction *newProject;
@@ -67,7 +82,7 @@ private:
     QMenu *optionMenu;
     QMenu *helpMenu;
 
-    ///////////////////////////////Tool bar//////////////////////////////
+    ///////////////////////////////TOOL BAR//////////////////////////////
     QToolBar *toolBar;
 
     QAction *newAct;
@@ -87,6 +102,13 @@ private:
     QTabWidget *tabWidget1;
     QTabWidget *tabWidget2;
     QTabWidget *tabWidget3;
+
+    ///////////////////////////MENU DIALOG/////////////////////
+    NewProjectDialog *newProjectDial;
+
+    //////////////////////////////PROJECT//////////////////////////
+    QDir currentProDir;
+    QString layerFilPath;
 };
 
 #endif // MAINWINDOW_H

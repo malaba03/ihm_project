@@ -1,25 +1,30 @@
 #include "Mainwindow.h"
+#include "graphicsscene.h"
+#include "editingview.h"
+
 #include <QRect>
 #include <QGraphicsItem>
 #include <QMenuBar>
-#include "graphicsscene.h"
-#include "editingview.h"
 #include <QScrollArea>
-//#include "ui_mainwindow.h"
+#include <QKeySequence>
+#include <QDir>
+
 
 Mainwindow::Mainwindow()/*  :
    QMainWindow(parent),
    ui(new Ui::MainWindow)*/
 {	
     //ui->setupUi(this);
+    createAllPopupDialog();
     createActionsToolbar();
     createToolbar();
 
     createActionsMenubar();
     createMenu();
-    //createComponentsView();
+
     createComponentsView();
     createMapEditView();
+
     setWindowTitle(tr("MapEditor"));
     connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
 
@@ -29,10 +34,10 @@ Mainwindow::Mainwindow()/*  :
 void Mainwindow::createActionsMenubar()
 {
 
-    newProject = new QAction(tr("&Open Project"),this);
+    newProject = new QAction(tr("&New Project"),this);
     newProject->setShortcuts(QKeySequence::New);
-    newProject->setStatusTip(tr("Open an existing project"));
-    connect(newProject, SIGNAL(triggered()), this, SLOT(newProjectPopup()));
+    newProject->setStatusTip(tr("Create a new project"));
+    connect(newProject, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
 
     openProject = new QAction(tr("&Open Project"),this);
     openProject->setShortcuts(QKeySequence::Open);
@@ -61,8 +66,10 @@ void Mainwindow::createMenu(){
 //Utilisation de label
 void Mainwindow::createComponentsView(){
     projectView =new QTreeView;
+    projectView->setEnabled(false);
 
     componentsView = new DragWidget;
+    componentsView->setEnabled(false);
 
     //mapEditView2->setMaximumWidth(200);
 
@@ -72,8 +79,9 @@ void Mainwindow::createComponentsView(){
 void Mainwindow::createMapEditView()
 {
 
-    mapEditScene = new GraphicsScene;
+    mapEditScene = new GraphicsScene(":/images/firstlayer.png");
     mapEditView = new EditingView(mapEditScene);
+    mapEditView->setEnabled(false);
     mapEditView->setDragMode(QGraphicsView::RubberBandDrag);
 
     
@@ -140,7 +148,7 @@ void Mainwindow::createActionsToolbar()
     newAct = new QAction(QString("New"),this);
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new file"));
-    //connect(newAct, SIGNAL(triggered()), this, SLOT(newFile()));
+    connect(newAct, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
 
     openAct = new QAction(QString("Open"),this);
     openAct->setShortcuts(QKeySequence::Open);
@@ -171,11 +179,64 @@ void Mainwindow::createActionsToolbar()
 
 
 }
+
+void Mainwindow::createAllPopupDialog(){
+
+    newProjectDial = new NewProjectDialog;
+    connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir)), this, SLOT(receiveCurrentProjectDir(QDir)));
+    connect(newProjectDial, SIGNAL(sendLayerFilePath(QString)), this, SLOT(receiveLayerFilePath(QString)));
+}
  
+void Mainwindow::newProjectDialog(){
+
+    //newProjectDial->getDefautfLocationOfProjectLineEdit()->setText(QDir::homePath());
+    newProjectDial->showNormal();
+
+}
+
+void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
+
+    this->setCurrentProDir(currentProjectDir);
+    qDebug() << "Current project path : " + this->currentProDir.absolutePath()+"\n";
+
+}
+
+void Mainwindow::receiveLayerFilePath(QString layerFilePath){
+
+    this->setLayerFilPath(layerFilePath);
+    mapEditScene->setLayerFile(layerFilPath);
+
+    projectView->setEnabled(true);
+    mapEditView->setEnabled(true);
+    componentsView->setEnabled(true);
+
+    qDebug() << "Layer file path : " + this->layerFilPath;
+
+}
+
 void Mainwindow::setEditViewLayer(){}
-void Mainwindow::newProjectPopup(){}
 void Mainwindow::openProjectPopup(){}
 void Mainwindow::closeProjectPopup(){}
 void Mainwindow::exportPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
+
+QString Mainwindow::getLayerFilPath() const
+{
+    return layerFilPath;
+}
+
+void Mainwindow::setLayerFilPath(const QString &value)
+{
+    layerFilPath = value;
+}
+
+QDir Mainwindow::getCurrentProDir() const
+{
+    return currentProDir;
+}
+
+void Mainwindow::setCurrentProDir(const QDir &value)
+{
+    currentProDir = value;
+}
