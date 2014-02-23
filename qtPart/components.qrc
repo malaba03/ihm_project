@@ -14,13 +14,22 @@
         <file>stairs/toRight.png</file>
         <file>stairs/toUp.png</file>
         <file>stairs/toDown.png</file>
-        <file>classroom/classroom.png</file>
+        <file>classrooms/classroom.png</file>
         <file>corridors/corridorH.png</file>
         <file>corridors/corridorV.png</file>
         <file>restrooms/restroom.png</file>
-        <file>elevators/elevator.png</file>
+        <file>elevator/elevator.png</file>
         <file>qrCode/qrcode.png</file>
         <file>firstlayer.png</file>
         <file>corridors/corridor1.png</file>
+        <file>corridors/corridorP2.png</file>
+        <file>corridors/corridorP3.png</file>
+        <file>restrooms/restroomP1.png</file>
+        <file>restrooms/restroomP2.png</file>
+        <file>restrooms/restroomP3.png</file>
+        <file>restrooms/restroomP4.png</file>
+        <file>corridors/corridorP4.png</file>
+        <file>corridors/corridorP5.png</file>
+        <file>classrooms/classroomP1.png</file>
     </qresource>
 </RCC>

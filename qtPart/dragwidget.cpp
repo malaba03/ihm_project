@@ -34,17 +34,30 @@
     QLabel *corridorVIc = new ComponentLabel(this,":/images/corridors/corridorV.png",keyCorridor);
     QLabel *corridorHIc = new ComponentLabel(this,":/images/corridors/corridorH.png",keyCorridor);
     QLabel *corridorP = new ComponentLabel(this,":/images/corridors/corridor1.png",keyCorridor);
-
+    QLabel *corridorP2 = new ComponentLabel(this,":/images/corridors/corridorP2.png",keyCorridor);
+    QLabel *corridorP3 = new ComponentLabel(this,":/images/corridors/corridorP3.png",keyCorridor);
+    QLabel *corridorP4 = new ComponentLabel(this,":/images/corridors/corridorP4.png",keyCorridor);
+    QLabel *corridorP5 = new ComponentLabel(this,":/images/corridors/corridorP5.png",keyCorridor);
+    /* QLabel *corridorP6 = new ComponentLabel(this,":/images/corridors/corridorP3.png",keyCorridor);*/
 
     ComponentIconLayout->addWidget(corridorVIc);
     ComponentIconLayout->addWidget(corridorHIc);
     ComponentIconLayout->addWidget(corridorP);
+    ComponentIconLayout->addWidget(corridorP2);
+    ComponentIconLayout->addWidget(corridorP3);
+    ComponentIconLayout->addWidget(corridorP4);
+    ComponentIconLayout->addWidget(corridorP5);
+    /*ComponentIconLayout->addWidget(corridorP6);*/
 
 
-    ComponentIconLayout->addWidget(new QLabel("Classroom"));
 
-    QLabel *classroomIc = new ComponentLabel(this,":/images/classroom/classroom",keyClassroom);
+    ComponentIconLayout->addWidget(new QLabel("Classrooms"));
+
+    QLabel *classroomIc = new ComponentLabel(this,":/images/classrooms/classroom",keyClassroom);
+    QLabel *classroomTIc = new ComponentLabel(this,":/images/classrooms/classroomP1.png",keyClassroom);
+
     ComponentIconLayout->addWidget(classroomIc);
+    ComponentIconLayout->addWidget(classroomTIc);
 
 
     ComponentIconLayout->addWidget(new QLabel("Doors"));
@@ -97,10 +110,19 @@
     ComponentIconLayout->addWidget(elevatorIc);
 
 
-    ComponentIconLayout->addWidget(new QLabel("Restroom"));
+    ComponentIconLayout->addWidget(new QLabel("Restrooms"));
 
     QLabel * restroomIc = new ComponentLabel(this,":/images/restrooms/restroom.png",keyRestroom);
+    QLabel * restroomP1 = new ComponentLabel(this,":/images/restrooms/restroomP1.png",keyRestroom);
+    QLabel * restroomP2 = new ComponentLabel(this,":/images/restrooms/restroomP2.png",keyRestroom);
+    QLabel * restroomP3 = new ComponentLabel(this,":/images/restrooms/restroomP3.png",keyRestroom);
+    QLabel * restroomP4 = new ComponentLabel(this,":/images/restrooms/restroomP4.png",keyRestroom);
+
     ComponentIconLayout->addWidget(restroomIc);
+    ComponentIconLayout->addWidget(restroomP1);
+    ComponentIconLayout->addWidget(restroomP2);
+    ComponentIconLayout->addWidget(restroomP3);
+    ComponentIconLayout->addWidget(restroomP4);
 
 
     ComponentIconLayout->addWidget(new QLabel("QrCodeBorn"));
