@@ -21,5 +21,6 @@
         <file>elevators/elevator.png</file>
         <file>qrCode/qrcode.png</file>
         <file>firstlayer.png</file>
+        <file>corridors/corridor1.png</file>
     </qresource>
 </RCC>

@@ -33,9 +33,12 @@
 
     QLabel *corridorVIc = new ComponentLabel(this,":/images/corridors/corridorV.png",keyCorridor);
     QLabel *corridorHIc = new ComponentLabel(this,":/images/corridors/corridorH.png",keyCorridor);
+    QLabel *corridorP = new ComponentLabel(this,":/images/corridors/corridor1.png",keyCorridor);
+
 
     ComponentIconLayout->addWidget(corridorVIc);
     ComponentIconLayout->addWidget(corridorHIc);
+    ComponentIconLayout->addWidget(corridorP);
 
 
     ComponentIconLayout->addWidget(new QLabel("Classroom"));
@@ -100,7 +103,7 @@
     ComponentIconLayout->addWidget(restroomIc);
 
 
-    ComponentIconLayout->addWidget(new QLabel("Elevator"));
+    ComponentIconLayout->addWidget(new QLabel("QrCodeBorn"));
 
     QLabel * qrCodeIc = new ComponentLabel(this,":/images/qrCode/qrcode.png",keyQrCode);
     ComponentIconLayout->addWidget(qrCodeIc);
