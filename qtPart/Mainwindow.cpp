@@ -164,7 +164,7 @@ void Mainwindow::createActionsToolbar()
     exportAct = new QAction(QString("Export As XML"),this);
     //editAct->setShortcuts(QKeySequence::New);
     exportAct->setStatusTip(tr("Edit a Task"));
-    //connect(editAct, SIGNAL(triggered()), this, SLOT(edit()));
+    connect( exportAct, SIGNAL(triggered()), this, SLOT(exportAsXmlDialog()));
 
     copyAct = new QAction(QString("Copy"),this);
     //connect(consultAct, SIGNAL(triggered()), this, SLOT(consult()));
@@ -185,6 +185,9 @@ void Mainwindow::createAllPopupDialog(){
     newProjectDial = new NewProjectDialog;
     connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir)), this, SLOT(receiveCurrentProjectDir(QDir)));
     connect(newProjectDial, SIGNAL(sendLayerFilePath(QString)), this, SLOT(receiveLayerFilePath(QString)));
+
+    exportAsXMLDial = new ExportingAsXmlDialog;
+
 }
  
 void Mainwindow::newProjectDialog(){
@@ -192,6 +195,10 @@ void Mainwindow::newProjectDialog(){
     //newProjectDial->getDefautfLocationOfProjectLineEdit()->setText(QDir::homePath());
     newProjectDial->showNormal();
 
+}
+
+void Mainwindow::exportAsXmlDialog(){
+    exportAsXMLDial->showNormal();
 }
 
 void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
@@ -217,7 +224,6 @@ void Mainwindow::receiveLayerFilePath(QString layerFilePath){
 void Mainwindow::setEditViewLayer(){}
 void Mainwindow::openProjectPopup(){}
 void Mainwindow::closeProjectPopup(){}
-void Mainwindow::exportPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
 

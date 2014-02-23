@@ -4,6 +4,7 @@
 #include "dragwidget.h"
 #include "graphicsscene.h"
 #include "newprojectdialog.h"
+#include "exportingasxmldialog.h"
 
 #include <QMainWindow>
 #include <QToolBar>
@@ -33,11 +34,12 @@ public:
      QString getLayerFilPath() const;
      void setLayerFilPath(const QString &value);
 
+
 public slots:
      void newProjectDialog();
+     void exportAsXmlDialog();
      void openProjectPopup();
      void closeProjectPopup();
-    void exportPopup();
     void saveProjectPopup();
     void exitPopup();
     void receiveCurrentProjectDir(QDir currentProjectDir);
@@ -103,8 +105,9 @@ private:
     QTabWidget *tabWidget2;
     QTabWidget *tabWidget3;
 
-    ///////////////////////////MENU DIALOG/////////////////////
+    ///////////////////////////DIALOG/////////////////////
     NewProjectDialog *newProjectDial;
+    ExportingAsXmlDialog *exportAsXMLDial;
 
     //////////////////////////////PROJECT//////////////////////////
     QDir currentProDir;

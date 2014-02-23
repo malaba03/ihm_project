@@ -14,7 +14,8 @@ HEADERS += Mainwindow.h \
     cornergrabber.h \
     graphicclassroomcomponent.h\
     popup.h \
-    newprojectdialog.h
+    newprojectdialog.h \
+    exportingasxmldialog.h
 
 SOURCES += Mainwindow.cpp main.cpp \
     editingview.cpp \
@@ -25,14 +26,16 @@ SOURCES += Mainwindow.cpp main.cpp \
     cornergrabber.cpp \
     graphicclassroomcomponent.cpp\
     popup.cpp \
-    newprojectdialog.cpp
+    newprojectdialog.cpp \
+    exportingasxmldialog.cpp
 
 RESOURCES += \
     components.qrc
 
 FORMS += \
     mainwindow.ui \
-    newprojectdialog.ui
+    newprojectdialog.ui \
+    exportingasxmldialog.ui
 
 
 
