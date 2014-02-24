@@ -5,6 +5,7 @@
 #include "graphicsscene.h"
 #include "newprojectdialog.h"
 #include "exportingasxmldialog.h"
+#include "editingview.h"
 
 #include <QMainWindow>
 #include <QToolBar>
@@ -16,6 +17,7 @@
 #include <QSplitter>
 #include <QDir>
 #include <QDebug>
+#include <QList>
 
 
 class Mainwindow : public QMainWindow
@@ -42,6 +44,7 @@ public slots:
     void receiveLayerFilePath(QString layerFilePath);
     void message();
     void loadLayer();
+    void closeTab(int indexTab);
 
 
 private:
@@ -54,14 +57,16 @@ private:
 
     void createMapEditView();
     void createComponentsView();
-    void setEditViewLayer();
 
     void createAllPopupDialog();
 
+    QList<GraphicsScene*> listGraphicsSceneView;
+    QList<EditingView*> listEditingView;
+
     DragWidget *componentsView;
 
-    GraphicsScene *mapEditScene;
-    QGraphicsView *mapEditView;
+    GraphicsScene *tempEditScene;
+    EditingView *tempEditView;
 
     QTreeView *projectView;
 

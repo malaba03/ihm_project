@@ -1,6 +1,6 @@
 #include "Mainwindow.h"
 #include "graphicsscene.h"
-#include "editingview.h"
+
 #include <QMessageBox>
 #include <QRect>
 #include <QGraphicsItem>
@@ -25,8 +25,8 @@ Mainwindow::Mainwindow()
     createMapEditView();
 
     setWindowTitle(tr("MapEditor"));
-    connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
-    connect(deleten, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
+    connect(delAct, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
+    connect(deleten, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
 }
 
 
@@ -97,18 +97,8 @@ void Mainwindow::createActionsMenubar()
 
 }
 
+
 void Mainwindow::createMenu(){
-
-    /*fileMenu = this->menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(newProject);
-    fileMenu->addAction(exit);
-    fileMenu->insertSeparator(exit);
-
-
-    editMenu = this->menuBar()->addMenu(tr("&Edit"));
-    viewMenu = this->menuBar()->addMenu(tr("&View"));
-    optionMenu = this->menuBar()->addMenu(tr("&Option"));
-    helpMenu = this->menuBar()->addMenu(tr("&Help"));*/
 
     fileMenu = this->menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newProject);
@@ -149,13 +139,16 @@ void Mainwindow::createComponentsView(){
 void Mainwindow::createMapEditView()
 {
 
-    mapEditScene = new GraphicsScene(":/images/firstlayer.png");
-    mapEditView = new EditingView(mapEditScene);
-    mapEditView->setEnabled(false);
-    mapEditView->setDragMode(QGraphicsView::RubberBandDrag);
+    tempEditScene = new GraphicsScene(":/images/firstlayer.png");
+    tempEditView = new EditingView(tempEditScene);
+    tempEditView->setEnabled(false);
+    tempEditView->setDragMode(QGraphicsView::RubberBandDrag);
+
+    listGraphicsSceneView.append(tempEditScene);
+    listEditingView.append(tempEditView);
 
     
-    mapEditView->show();
+    tempEditView->show();
 
     layout = new QHBoxLayout;
     widget = new QWidget;
@@ -167,11 +160,13 @@ void Mainwindow::createMapEditView()
     layerViewTab= new QTabWidget;
     componentsViewTab= new QTabWidget;
 
+    connect(layerViewTab, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+
     projectViewTab->addTab(projectView,"Project Viewer");
 
     splitter->addWidget(projectViewTab);
 
-    layerViewTab->addTab(mapEditView,"Editing of maps");
+    layerViewTab->addTab(tempEditView,"Editing of maps");
 
     splitter->addWidget(layerViewTab);
 
@@ -185,6 +180,7 @@ void Mainwindow::createMapEditView()
     setCentralWidget(widget);
 
 }
+
 
 void Mainwindow::createToolbar()
 {
@@ -213,38 +209,9 @@ void Mainwindow::createToolbar()
     this->addToolBar(toolBar);
 }
 
+
 void Mainwindow::createActionsToolbar()
 {
-    /*newAct = new QAction(QString("New"),this);
-    newAct->setShortcuts(QKeySequence::New);
-    newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
-
-    openAct = new QAction(QString("Open"),this);
-    openAct->setShortcuts(QKeySequence::Open);
-    openAct->setStatusTip(tr("Open an existing file"));
-    //connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
-
-
-    saveAct = new QAction(QString("Save"), this);
-    saveAct->setShortcuts(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the document to disk"));
-    //connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
-
-    exportAct = new QAction(QString("Export As XML"),this);
-    //editAct->setShortcuts(QKeySequence::New);
-    exportAct->setStatusTip(tr("Edit a Task"));
-    connect( exportAct, SIGNAL(triggered()), this, SLOT(exportAsXmlDialog()));
-
-    copyAct = new QAction(QString("Copy"),this);
-    //connect(consultAct, SIGNAL(triggered()), this, SLOT(consult()));
-
-    cutAct = new QAction(QString("Cut"),this);
-    //connect(addAct, SIGNAL(triggered()), this, SLOT(add()));
-
-    pasteAct = new QAction(QString("Paste"),this);
-
-    delAct = new QAction(QString("Delete"),this);*/
 
     newAct = new QAction(QString("New"),this);
     newAct->setIcon(QIcon(":/menuicon/iconesmenu/new.png"));
@@ -295,6 +262,7 @@ void Mainwindow::createActionsToolbar()
 
 }
 
+
 void Mainwindow::createAllPopupDialog(){
 
     newProjectDial = new NewProjectDialog;
@@ -304,16 +272,20 @@ void Mainwindow::createAllPopupDialog(){
     exportAsXMLDial = new ExportingAsXmlDialog;
 
 }
- 
+
+
 void Mainwindow::newProjectDialog(){
 
     newProjectDial->showNormal();
 
 }
 
+
 void Mainwindow::exportAsXmlDialog(){
+
     exportAsXMLDial->showNormal();
 }
+
 
 void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
 
@@ -322,27 +294,26 @@ void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
 
 }
 
+
 void Mainwindow::receiveLayerFilePath(QString layerFilePath){
 
     this->setLayerFilPath(layerFilePath);
-    mapEditScene->setLayerFile(layerFilPath);
+    tempEditScene->setLayerFile(layerFilPath);
 
     projectView->setEnabled(true);
-    mapEditView->setEnabled(true);
+    tempEditView->setEnabled(true);
     componentsView->setEnabled(true);
 
     qDebug() << "Layer file path : " + this->layerFilPath;
 
 }
 
-void Mainwindow::setEditViewLayer(){}
+
 void Mainwindow::openProjectPopup(){
 
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),"/");
 }
-void Mainwindow::closeProjectPopup(){}
-void Mainwindow::saveProjectPopup(){}
-void Mainwindow::exitPopup(){}
+
 
 void Mainwindow::loadLayer()
 {
@@ -356,6 +327,13 @@ void Mainwindow::loadLayer()
 
 }
 
+
+void Mainwindow::closeTab(int indexTab)
+{
+    layerViewTab->removeTab(indexTab);
+}
+
+
 void Mainwindow::message()
 {
     QMessageBox::information(this,"Map Info", "Auteurs : Lamine BA, Yannis GREGO, Pierre GNAGNE");
@@ -367,17 +345,25 @@ QString Mainwindow::getLayerFilPath() const
     return layerFilPath;
 }
 
+
 void Mainwindow::setLayerFilPath(const QString &value)
 {
     layerFilPath = value;
 }
+
 
 QDir Mainwindow::getCurrentProDir() const
 {
     return currentProDir;
 }
 
+
 void Mainwindow::setCurrentProDir(const QDir &value)
 {
     currentProDir = value;
 }
+
+
+void Mainwindow::closeProjectPopup(){}
+void Mainwindow::saveProjectPopup(){}
+void Mainwindow::exitPopup(){}
