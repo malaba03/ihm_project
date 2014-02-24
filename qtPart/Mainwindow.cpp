@@ -1,7 +1,6 @@
 #include "Mainwindow.h"
 #include "graphicsscene.h"
 #include "editingview.h"
-
 #include <QMessageBox>
 #include <QRect>
 #include <QGraphicsItem>
@@ -68,7 +67,7 @@ void Mainwindow::createActionsMenubar()
     saveas = new QAction(tr("Save As"),this);
 
     importlayer = new QAction(tr("Import Layer"),this);
-    connect(importlayer, SIGNAL(triggered()), this, SLOT(openProjectPopup()));
+    connect(importlayer, SIGNAL(triggered()), this, SLOT(loadLayer()));
 
     exporttoXml= new QAction(tr("Export To XML"),this);
     exporttoXml->setIcon(QIcon(":/menuicon/iconesmenu/save.png"));
@@ -344,6 +343,18 @@ void Mainwindow::openProjectPopup(){
 void Mainwindow::closeProjectPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
+
+void Mainwindow::loadLayer()
+{
+    QString pathLayer = QFileDialog::getOpenFileName(this, tr("Opening a image used as layer)"), QDir::homePath(), tr("Image Files (*.png *.jpg)"));
+    GraphicsScene *tempScene = new GraphicsScene(pathLayer);
+    EditingView *tempEditView = new EditingView(tempScene);
+    tempEditView ->setDragMode(QGraphicsView::RubberBandDrag);
+    tempEditView ->show();
+    layerViewTab->addTab(tempEditView,"Editing of maps");
+    layerViewTab->setTabsClosable(true);
+
+}
 
 void Mainwindow::message()
 {

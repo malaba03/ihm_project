@@ -32,15 +32,16 @@ public:
 
 
 public slots:
-     void newProjectDialog();
-     void exportAsXmlDialog();
-     void openProjectPopup();
-     void closeProjectPopup();
+    void newProjectDialog();
+    void exportAsXmlDialog();
+    void openProjectPopup();
+    void closeProjectPopup();
     void saveProjectPopup();
     void exitPopup();
     void receiveCurrentProjectDir(QDir currentProjectDir);
     void receiveLayerFilePath(QString layerFilePath);
-      void message();
+    void message();
+    void loadLayer();
 
 
 private:
