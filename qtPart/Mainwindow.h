@@ -101,9 +101,9 @@ private:
     QWidget *widget;
     QSplitter *splitter;
 
-    QTabWidget *tabWidget1;
-    QTabWidget *tabWidget2;
-    QTabWidget *tabWidget3;
+    QTabWidget *projectViewTab;
+    QTabWidget *layerViewTab;
+    QTabWidget *componentsViewTab;
 
     ///////////////////////////DIALOG/////////////////////
     NewProjectDialog *newProjectDial;

@@ -100,25 +100,25 @@ void Mainwindow::createMapEditView()
 
     splitter= new QSplitter(this);
 
-    tabWidget1= new QTabWidget;
-    tabWidget2= new QTabWidget;
-    tabWidget3= new QTabWidget;
+    projectViewTab= new QTabWidget;
+    layerViewTab= new QTabWidget;
+    componentsViewTab= new QTabWidget;
 
-    tabWidget1->addTab(projectView,"Project Viewer");
+    projectViewTab->addTab(projectView,"Project Viewer");
 
-    splitter->addWidget(tabWidget1);
+    splitter->addWidget(projectViewTab);
 
-    tabWidget2->addTab(mapEditView,"Editing of maps");
+    layerViewTab->addTab(mapEditView,"Editing of maps");
 
-    splitter->addWidget(tabWidget2);
+    splitter->addWidget(layerViewTab);
 
     layout->addWidget(splitter,8);
 
    QScrollArea *scrollArea = new QScrollArea;
     scrollArea->setWidget(componentsView);
 
-    tabWidget3->addTab(scrollArea,"Components Tools");
-    layout->addWidget(tabWidget3,2);
+    componentsViewTab->addTab(scrollArea,"Components Tools");
+    layout->addWidget(componentsViewTab,2);
     setCentralWidget(widget);
 
 }
