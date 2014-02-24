@@ -2,7 +2,7 @@
 #define GRAPHICSSCENE_H
 
 #include "graphiccomponent.h"
-#include "graphicclassroomcomponent.h"
+
 
 
 #include <QGraphicsScene>

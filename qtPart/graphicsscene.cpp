@@ -72,19 +72,10 @@ void GraphicsScene::dropEvent ( QGraphicsSceneDragDropEvent * event ){
         printf("\nType :%d",type);
 
         //Peut etre utilisé pour la création des classes coeur(Classroom,Door,Corridor...)
-        switch(type){
 
-        case ClassroomType :
-            tempGraphicComponent = new GraphicClassroomComponent(pixmap,type);
-            tempGraphicComponent->setPos(event->scenePos());;
-            break;
-
-        default:
             tempGraphicComponent = new GraphicComponent(pixmap,type);
             //testPixmap = new GraphicComponent(pixmap);
             tempGraphicComponent->setPos(event->scenePos());;
-
-        }
 
         addItem(tempGraphicComponent);
         event->accept();

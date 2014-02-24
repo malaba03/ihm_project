@@ -10,24 +10,24 @@ HEADERS += Mainwindow.h \
     graphicsscene.h \
     dragwidget.h \
     componentlabel.h \
-    graphiccomponent.h \
     cornergrabber.h \
-    graphicclassroomcomponent.h\
     popup.h \
     newprojectdialog.h \
-    exportingasxmldialog.h
+    exportingasxmldialog.h \
+    graphiccomponent.h \
+    topgraphiccomponent.h
 
 SOURCES += Mainwindow.cpp main.cpp \
     editingview.cpp \
     graphicsscene.cpp \
     dragwidget.cpp \
     componentlabel.cpp \
-    graphiccomponent.cpp \
     cornergrabber.cpp \
-    graphicclassroomcomponent.cpp\
     popup.cpp \
     newprojectdialog.cpp \
-    exportingasxmldialog.cpp
+    exportingasxmldialog.cpp \
+    graphiccomponent.cpp \
+    topgraphiccomponent.cpp
 
 RESOURCES += \
     components.qrc
