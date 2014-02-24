@@ -84,6 +84,7 @@ void NewProjectDialog::on_newProjectButton_accepted()
     }*/
     QDir home = QDir::home();
     QDir projectDir;
+    projectName = projectNameLineEdit->text();
     int result = home.absolutePath().compare(home.path());
     QString layerFilePath = layerFileNameLineEdit->text();
     QString projectName = projectNameLineEdit->text();
@@ -107,7 +108,7 @@ void NewProjectDialog::on_newProjectButton_accepted()
                 ///transfert project name
                 ///path of layer file
                 projectDir.cd(projectName);
-                emit sendCurrentProjectDir(projectDir);
+                emit sendCurrentProjectDir(projectDir,projectName);
                 emit sendLayerFilePath(layerFilePath);
 
 

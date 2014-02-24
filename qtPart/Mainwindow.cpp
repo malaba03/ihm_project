@@ -9,7 +9,8 @@
 #include <QKeySequence>
 #include <QDir>
 #include <QFileDialog>
-
+#include <QFileSystemModel>
+#include <QDirModel>
 
 Mainwindow::Mainwindow()
 {	
@@ -27,6 +28,7 @@ Mainwindow::Mainwindow()
     setWindowTitle(tr("MapEditor"));
     connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
     connect(deleten, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
+
 }
 
 
@@ -298,7 +300,7 @@ void Mainwindow::createActionsToolbar()
 void Mainwindow::createAllPopupDialog(){
 
     newProjectDial = new NewProjectDialog;
-    connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir)), this, SLOT(receiveCurrentProjectDir(QDir)));
+    connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir,QString)), this, SLOT(receiveCurrentProjectDir(QDir,QString)));
     connect(newProjectDial, SIGNAL(sendLayerFilePath(QString)), this, SLOT(receiveLayerFilePath(QString)));
 
     exportAsXMLDial = new ExportingAsXmlDialog;
@@ -315,11 +317,14 @@ void Mainwindow::exportAsXmlDialog(){
     exportAsXMLDial->showNormal();
 }
 
-void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
+void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir, QString projectName){
 
     this->setCurrentProDir(currentProjectDir);
     qDebug() << "Current project path : " + this->currentProDir.absolutePath()+"\n";
 
+    this->setProjName(projectName);
+    qDebug() << "Project name : " + this->projName+"\n";
+    treeProject();
 }
 
 void Mainwindow::receiveLayerFilePath(QString layerFilePath){
@@ -361,7 +366,6 @@ void Mainwindow::message()
     QMessageBox::information(this,"Map Info", "Auteurs : Lamine BA, Yannis GREGO, Pierre GNAGNE");
 }
 
-
 QString Mainwindow::getLayerFilPath() const
 {
     return layerFilPath;
@@ -381,3 +385,22 @@ void Mainwindow::setCurrentProDir(const QDir &value)
 {
     currentProDir = value;
 }
+
+ void Mainwindow::treeProject()
+ {
+     QDirModel *model = new QDirModel;
+     projectView->setModel(model);
+     projectView->setRootIndex(model->index("/home/pierre/mapeditorProjects/"+projName));
+     projectView->setEnabled(true);
+
+ }
+
+ QString Mainwindow::getProjName() const
+ {
+     return projName;
+ }
+
+ void Mainwindow::setProjName(const QString &value)
+ {
+     projName = value;
+ }

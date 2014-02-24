@@ -29,7 +29,7 @@ protected:
    virtual void dragLeaveEvent ( QGraphicsSceneDragDropEvent * event );
     virtual void dragMoveEvent ( QGraphicsSceneDragDropEvent * event );
     virtual void dropEvent ( QGraphicsSceneDragDropEvent * event );
-    virtual void 	drawBackground ( QPainter * painter, const QRectF & rect );
+    virtual void drawBackground ( QPainter * painter, const QRectF & rect );
 signals:
 
 private:
