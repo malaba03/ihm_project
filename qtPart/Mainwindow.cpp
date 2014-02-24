@@ -26,14 +26,10 @@ Mainwindow::Mainwindow()
     createMapEditView();
 
     setWindowTitle(tr("MapEditor"));
-<<<<<<< HEAD
+
     connect(delAct, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
     connect(deleten, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
-=======
-    connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
-    connect(deleten, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
 
->>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a
 }
 
 
@@ -293,12 +289,8 @@ void Mainwindow::exportAsXmlDialog(){
     exportAsXMLDial->showNormal();
 }
 
-<<<<<<< HEAD
 
-void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
-=======
 void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir, QString projectName){
->>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a
 
     this->setCurrentProDir(currentProjectDir);
     qDebug() << "Current project path : " + this->currentProDir.absolutePath()+"\n";
@@ -376,12 +368,12 @@ void Mainwindow::setCurrentProDir(const QDir &value)
     currentProDir = value;
 }
 
-<<<<<<< HEAD
+
 
 void Mainwindow::closeProjectPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
-=======
+
  void Mainwindow::treeProject()
  {
      QDirModel *model = new QDirModel;
@@ -400,4 +392,4 @@ void Mainwindow::exitPopup(){}
  {
      projName = value;
  }
->>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a
+
