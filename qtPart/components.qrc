@@ -33,4 +33,15 @@
         <file>classrooms/classroomP1.png</file>
         <file>corridors/corridorP6.png</file>
     </qresource>
+    <qresource prefix="/menuicon">
+        <file>iconesmenu/copy.png</file>
+        <file>iconesmenu/cut.png</file>
+        <file>iconesmenu/delete.png</file>
+        <file>iconesmenu/file_xml.png</file>
+        <file>iconesmenu/maps.png</file>
+        <file>iconesmenu/new.png</file>
+        <file>iconesmenu/open.png</file>
+        <file>iconesmenu/paste.png</file>
+        <file>iconesmenu/save.png</file>
+    </qresource>
 </RCC>

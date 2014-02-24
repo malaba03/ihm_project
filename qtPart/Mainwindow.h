@@ -18,10 +18,6 @@
 #include <QDebug>
 
 
-/*namespace Ui {
-class MainWindow;
-}*/
-
 class Mainwindow : public QMainWindow
 {
     Q_OBJECT
@@ -44,11 +40,11 @@ public slots:
     void exitPopup();
     void receiveCurrentProjectDir(QDir currentProjectDir);
     void receiveLayerFilePath(QString layerFilePath);
+      void message();
 
 
 private:
 
-    //Ui::MainWindow *ui;
     void createMenu();
     void createActionsMenubar();
 
@@ -57,7 +53,6 @@ private:
 
     void createMapEditView();
     void createComponentsView();
-    void createComponentsView2();
     void setEditViewLayer();
 
     void createAllPopupDialog();
@@ -95,6 +90,17 @@ private:
     QAction *cutAct;
     QAction *pasteAct;
     QAction *delAct;
+
+    QAction *openn;
+    QAction *saven;
+    QAction *saveas;
+    QAction *importlayer;
+    QAction *exporttoXml;
+    QAction *cutn;
+    QAction *copyn;
+    QAction *pasten;
+    QAction *deleten;
+    QAction *aboutn;
 
     /////////////////////////SPECIAL FOR LAYOUT/////////////////////////////
     QHBoxLayout *layout;

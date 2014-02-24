@@ -2,19 +2,19 @@
 #include "graphicsscene.h"
 #include "editingview.h"
 
+#include <QMessageBox>
 #include <QRect>
 #include <QGraphicsItem>
 #include <QMenuBar>
 #include <QScrollArea>
 #include <QKeySequence>
 #include <QDir>
+#include <QFileDialog>
 
 
-Mainwindow::Mainwindow()/*  :
-   QMainWindow(parent),
-   ui(new Ui::MainWindow)*/
+Mainwindow::Mainwindow()
 {	
-    //ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/menuicon/iconesmenu/maps.png"));
     createAllPopupDialog();
     createActionsToolbar();
     createToolbar();
@@ -27,7 +27,7 @@ Mainwindow::Mainwindow()/*  :
 
     setWindowTitle(tr("MapEditor"));
     connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
-
+    connect(deleten, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
 }
 
 
@@ -35,6 +35,8 @@ void Mainwindow::createActionsMenubar()
 {
 
     newProject = new QAction(tr("&New Project"),this);
+    newProject->setIcon(QIcon(":/menuicon/iconesmenu/new.png"));
+    newProject->setIconVisibleInMenu(true);
     newProject->setShortcuts(QKeySequence::New);
     newProject->setStatusTip(tr("Create a new project"));
     connect(newProject, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
@@ -53,11 +55,52 @@ void Mainwindow::createActionsMenubar()
     closeProject->setStatusTip(tr("Close the mapEditor windows"));
     connect(exit, SIGNAL(triggered()), this, SLOT(close()));
 
+    openn = new QAction(tr("Open Project"),this);
+    openn->setIcon(QIcon(":/menuicon/iconesmenu/open.png"));
+    openn->setIconVisibleInMenu(true);
+    connect(openn, SIGNAL(triggered()), this, SLOT(openProjectPopup()));
+
+
+    saven = new QAction(tr("Save"),this);
+    saven->setIcon(QIcon(":/menuicon/iconesmenu/save.png"));
+    saven->setIconVisibleInMenu(true);
+
+    saveas = new QAction(tr("Save As"),this);
+
+    importlayer = new QAction(tr("Import Layer"),this);
+    connect(importlayer, SIGNAL(triggered()), this, SLOT(openProjectPopup()));
+
+    exporttoXml= new QAction(tr("Export To XML"),this);
+    exporttoXml->setIcon(QIcon(":/menuicon/iconesmenu/save.png"));
+    exporttoXml->setIconVisibleInMenu(true);
+    connect(exporttoXml, SIGNAL(triggered()), this, SLOT(exportAsXmlDialog()));
+
+    exit = new QAction(tr("Exit"),this);
+
+    cutn = new QAction(tr("Cut"),this);
+    cutn->setIcon(QIcon(":/menuicon/iconesmenu/cut.png"));
+    cutn->setIconVisibleInMenu(true);
+
+    copyn = new QAction(tr("Copy"),this);
+    copyn->setIcon(QIcon(":/menuicon/iconesmenu/copy.png"));
+    copyn->setIconVisibleInMenu(true);
+
+    pasten = new QAction(tr("Paste"),this);
+    pasten->setIcon(QIcon(":/menuicon/iconesmenu/paste.png"));
+    pasten->setIconVisibleInMenu(true);
+
+    deleten = new QAction(tr("Delete Item"),this);
+    deleten->setIcon(QIcon(":/menuicon/iconesmenu/delete.png"));
+    deleten->setIconVisibleInMenu(true);
+
+
+    aboutn = new QAction(tr("About Map Editor 1.1"),this);
+
 }
 
 void Mainwindow::createMenu(){
 
-    fileMenu = this->menuBar()->addMenu(tr("&File"));
+    /*fileMenu = this->menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newProject);
     fileMenu->addAction(exit);
     fileMenu->insertSeparator(exit);
@@ -66,19 +109,40 @@ void Mainwindow::createMenu(){
     editMenu = this->menuBar()->addMenu(tr("&Edit"));
     viewMenu = this->menuBar()->addMenu(tr("&View"));
     optionMenu = this->menuBar()->addMenu(tr("&Option"));
+    helpMenu = this->menuBar()->addMenu(tr("&Help"));*/
+
+    fileMenu = this->menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(newProject);
+    fileMenu->addAction(openn);
+    fileMenu->insertSeparator(saven);
+    fileMenu->addAction(saven);
+    fileMenu->addAction(saveas);
+    fileMenu->insertSeparator(importlayer);
+    fileMenu->addAction(importlayer);
+    fileMenu->addAction(exporttoXml);
+    fileMenu->insertSeparator(exit);
+    fileMenu->addAction(exit);
+    connect(exit,SIGNAL(triggered()),this,SLOT(close()));
+
+    editMenu = this->menuBar()->addMenu(tr("&Edit"));
+    editMenu->addAction(cutn);
+    editMenu->addAction(copyn);
+    editMenu->addAction(pasten);
+    editMenu->addSeparator();
+    editMenu->addAction(deleten);
+
     helpMenu = this->menuBar()->addMenu(tr("&Help"));
+    helpMenu->addAction(aboutn);
+    connect(aboutn,SIGNAL(triggered()),this,SLOT(message()));
 }
 
 
-//Utilisation de label
 void Mainwindow::createComponentsView(){
     projectView =new QTreeView;
     projectView->setEnabled(false);
 
     componentsView = new DragWidget;
     componentsView->setEnabled(false);
-
-    //mapEditView2->setMaximumWidth(200);
 
 }
 
@@ -152,7 +216,7 @@ void Mainwindow::createToolbar()
 
 void Mainwindow::createActionsToolbar()
 {
-    newAct = new QAction(QString("New"),this);
+    /*newAct = new QAction(QString("New"),this);
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new file"));
     connect(newAct, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
@@ -181,9 +245,54 @@ void Mainwindow::createActionsToolbar()
 
     pasteAct = new QAction(QString("Paste"),this);
 
+    delAct = new QAction(QString("Delete"),this);*/
+
+    newAct = new QAction(QString("New"),this);
+    newAct->setIcon(QIcon(":/menuicon/iconesmenu/new.png"));
+    newAct->setIconVisibleInMenu(true);
+    newAct->setShortcuts(QKeySequence::New);
+    newAct->setStatusTip(tr("Create a new file"));
+    connect(newAct, SIGNAL(triggered()), this, SLOT(newProjectDialog()));
+
+    openAct = new QAction(QString("Open"),this);
+    openAct->setIcon(QIcon(":/menuicon/iconesmenu/open.png"));
+    openAct->setIconVisibleInMenu(true);
+    openAct->setShortcuts(QKeySequence::Open);
+    openAct->setStatusTip(tr("Open an existing file"));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(openProjectPopup()));
+
+
+    saveAct = new QAction(QString("Save"), this);
+    saveAct->setIcon(QIcon(":/menuicon/iconesmenu/save.png"));
+    saveAct->setIconVisibleInMenu(true);
+    saveAct->setShortcuts(QKeySequence::Save);
+    saveAct->setStatusTip(tr("Save the document to disk"));
+    //connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
+
+    exportAct = new QAction(QString("Export to XML"),this);
+    //editAct->setShortcuts(QKeySequence::New);
+    exportAct->setIcon(QIcon(":/menuicon/iconesmenu/file_xml.png"));
+    exportAct->setIconVisibleInMenu(true);
+    exportAct->setStatusTip(tr("Edit a Task"));
+    connect( exportAct, SIGNAL(triggered()), this, SLOT(exportAsXmlDialog()));
+
+    copyAct = new QAction(QString("Copy"),this);
+    copyAct->setIcon(QIcon(":/menuicon/iconesmenu/copy.png"));
+    copyAct->setIconVisibleInMenu(true);
+    //connect(consultAct, SIGNAL(triggered()), this, SLOT(consult()));
+
+    cutAct = new QAction(QString("Cut"),this);
+    cutAct->setIcon(QIcon(":/menuicon/iconesmenu/cut.png"));
+    cutAct->setIconVisibleInMenu(true);
+    //connect(addAct, SIGNAL(triggered()), this, SLOT(add()));
+
+    pasteAct = new QAction(QString("Paste"),this);
+    pasteAct->setIcon(QIcon(":/menuicon/iconesmenu/paste.png"));
+    pasteAct->setIconVisibleInMenu(true);
+
     delAct = new QAction(QString("Delete"),this);
-
-
+    delAct->setIcon(QIcon(":/menuicon/iconesmenu/delete.png"));
+    delAct->setIconVisibleInMenu(true);
 
 }
 
@@ -199,7 +308,6 @@ void Mainwindow::createAllPopupDialog(){
  
 void Mainwindow::newProjectDialog(){
 
-    //newProjectDial->getDefautfLocationOfProjectLineEdit()->setText(QDir::homePath());
     newProjectDial->showNormal();
 
 }
@@ -229,10 +337,19 @@ void Mainwindow::receiveLayerFilePath(QString layerFilePath){
 }
 
 void Mainwindow::setEditViewLayer(){}
-void Mainwindow::openProjectPopup(){}
+void Mainwindow::openProjectPopup(){
+
+    QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),"/");
+}
 void Mainwindow::closeProjectPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
+
+void Mainwindow::message()
+{
+    QMessageBox::information(this,"Map Info", "Auteurs : Lamine BA, Yannis GREGO, Pierre GNAGNE");
+}
+
 
 QString Mainwindow::getLayerFilPath() const
 {
