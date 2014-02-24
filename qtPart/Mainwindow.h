@@ -31,16 +31,19 @@ public:
 
      QString getLayerFilPath() const;
      void setLayerFilPath(const QString &value);
+     void treeProject();
 
+     QString getProjName() const;
+     void setProjName(const QString &value);
 
 public slots:
-    void newProjectDialog();
-    void exportAsXmlDialog();
+     void newProjectDialog();
+     void exportAsXmlDialog();
     void openProjectPopup();
     void closeProjectPopup();
     void saveProjectPopup();
     void exitPopup();
-    void receiveCurrentProjectDir(QDir currentProjectDir);
+    void receiveCurrentProjectDir(QDir currentProjectDir, QString projectName);
     void receiveLayerFilePath(QString layerFilePath);
     void message();
     void loadLayer();
@@ -124,6 +127,7 @@ private:
     //////////////////////////////PROJECT//////////////////////////
     QDir currentProDir;
     QString layerFilPath;
+    QString projName;
 };
 
 #endif // MAINWINDOW_H

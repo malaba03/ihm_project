@@ -9,7 +9,8 @@
 #include <QKeySequence>
 #include <QDir>
 #include <QFileDialog>
-
+#include <QFileSystemModel>
+#include <QDirModel>
 
 Mainwindow::Mainwindow()
 {	
@@ -25,8 +26,14 @@ Mainwindow::Mainwindow()
     createMapEditView();
 
     setWindowTitle(tr("MapEditor"));
+<<<<<<< HEAD
     connect(delAct, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
     connect(deleten, SIGNAL(triggered()), tempEditScene, SLOT(deleteComponents()));
+=======
+    connect(delAct, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
+    connect(deleten, SIGNAL(triggered()), mapEditScene, SLOT(deleteComponents()));
+
+>>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a
 }
 
 
@@ -266,7 +273,7 @@ void Mainwindow::createActionsToolbar()
 void Mainwindow::createAllPopupDialog(){
 
     newProjectDial = new NewProjectDialog;
-    connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir)), this, SLOT(receiveCurrentProjectDir(QDir)));
+    connect(newProjectDial, SIGNAL(sendCurrentProjectDir(QDir,QString)), this, SLOT(receiveCurrentProjectDir(QDir,QString)));
     connect(newProjectDial, SIGNAL(sendLayerFilePath(QString)), this, SLOT(receiveLayerFilePath(QString)));
 
     exportAsXMLDial = new ExportingAsXmlDialog;
@@ -286,12 +293,19 @@ void Mainwindow::exportAsXmlDialog(){
     exportAsXMLDial->showNormal();
 }
 
+<<<<<<< HEAD
 
 void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir){
+=======
+void Mainwindow::receiveCurrentProjectDir(QDir currentProjectDir, QString projectName){
+>>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a
 
     this->setCurrentProDir(currentProjectDir);
     qDebug() << "Current project path : " + this->currentProDir.absolutePath()+"\n";
 
+    this->setProjName(projectName);
+    qDebug() << "Project name : " + this->projName+"\n";
+    treeProject();
 }
 
 
@@ -339,7 +353,6 @@ void Mainwindow::message()
     QMessageBox::information(this,"Map Info", "Auteurs : Lamine BA, Yannis GREGO, Pierre GNAGNE");
 }
 
-
 QString Mainwindow::getLayerFilPath() const
 {
     return layerFilPath;
@@ -363,7 +376,28 @@ void Mainwindow::setCurrentProDir(const QDir &value)
     currentProDir = value;
 }
 
+<<<<<<< HEAD
 
 void Mainwindow::closeProjectPopup(){}
 void Mainwindow::saveProjectPopup(){}
 void Mainwindow::exitPopup(){}
+=======
+ void Mainwindow::treeProject()
+ {
+     QDirModel *model = new QDirModel;
+     projectView->setModel(model);
+     projectView->setRootIndex(model->index("/home/pierre/mapeditorProjects/"+projName));
+     projectView->setEnabled(true);
+
+ }
+
+ QString Mainwindow::getProjName() const
+ {
+     return projName;
+ }
+
+ void Mainwindow::setProjName(const QString &value)
+ {
+     projName = value;
+ }
+>>>>>>> 16df3524f7369c1a5103004722acedfab12f2a6a

@@ -75,6 +75,7 @@ void GraphicsScene::dropEvent ( QGraphicsSceneDragDropEvent * event ){
 
             tempGraphicComponent = new GraphicComponent(pixmap,type);
             //testPixmap = new GraphicComponent(pixmap);
+
             tempGraphicComponent->setPos(event->scenePos());;
 
         addItem(tempGraphicComponent);

@@ -39,10 +39,11 @@ private:
     QLineEdit *defautfLocationOfProjectLineEdit;
     QString currentUserHomePath;
     QString mapeditorProjectDirName;
+    QString projectName;
 
 
 signals:
-    void sendCurrentProjectDir(QDir);
+    void sendCurrentProjectDir(QDir,QString);
     void sendLayerFilePath(QString);
 
 private slots:
